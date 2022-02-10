@@ -22,7 +22,7 @@ import java.util.Locale;
  */
 public class PoseClassifierProcessor {
     private static final String TAG = "PoseClassifierProcessor";
-    private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_all.csv";
+    private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_bas.csv";
     private static final String POSE_ACTIVITY = "pose/fitness_poses_csvs_bas.csv";
     // private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_without_outliers.csv";
     // private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_with_outliers.csv";

@@ -22,14 +22,14 @@ import java.util.Locale;
  */
 public class PoseClassifierProcessor {
     private static final String TAG = "PoseClassifierProcessor";
-    private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_all.csv";
-    private static final String POSE_ACTIVITY = "pose/fitness_poses_csvs_bas.csv";
+    private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_arm.csv";
+    private static final String POSE_ACTIVITY = "pose/fitness_poses_csvs_out_arm.csv";
     // private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_without_outliers.csv";
     // private static final String POSE_SAMPLES_FILE = "pose/fitness_poses_csvs_out_with_outliers.csv";
     //  private static final String POSE_SAMPLES_FILE = "pose/beginners_poses_csvs_out.csv";
 
-    private static final String PUSHUPS_CLASS = "pushup_push";
-    private static final String SQUATS_CLASS = "squats_down";
+    private static final String PUSHUPS_CLASS = "Left";
+    private static final String SQUATS_CLASS = "Right";
     private static final String[] POSE_CLASSES = {
             PUSHUPS_CLASS, SQUATS_CLASS
             // PUSHUPS_CLASS
@@ -139,11 +139,15 @@ public class PoseClassifierProcessor {
 
     @WorkerThread
     public List<String> getPoseResultWithReps(Pose pose) {
+
+        
         Preconditions.checkState(Looper.myLooper() != Looper.getMainLooper());
         List<String> result = new ArrayList<>();
 
         ClassificationResult classification = poseClassifier.classify(pose);
         classification = emaSmoothing.getSmoothedResult(classification);
+
+        
 
         if (pose.getAllPoseLandmarks().isEmpty()) {
             return result;
@@ -171,6 +175,8 @@ public class PoseClassifierProcessor {
         if (!pose.getAllPoseLandmarks().isEmpty()) {
             String maxConfidenceClass = classification.getMaxConfidenceClass();
             float poseAccuracy = classification.getClassConfidence(maxConfidenceClass) / poseClassifier.confidenceRange();
+            System.out.println("#####confidenc = "+ poseAccuracy + "cofidence = " + classification.getClassConfidence(maxConfidenceClass) + " +++++===== " + poseClassifier.confidenceRange() + "max = " + maxConfidenceClass);
+            
 
             // THESE ARE REQUIRED IN FLUTTER
             // -----------------------------------------------------------------------------------
@@ -179,6 +185,7 @@ public class PoseClassifierProcessor {
             // -----------------------------------------------------------------------------------
             //
             PoseDataStorage.setData(maxConfidenceClass, Double.parseDouble(String.format(Locale.US, "%.2f", poseAccuracy)));
+
         }
 
         return result;
