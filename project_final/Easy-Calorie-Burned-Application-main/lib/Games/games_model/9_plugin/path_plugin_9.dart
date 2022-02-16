@@ -1,0 +1,9 @@
+export '01_arm_stretch_full/pose_detector_views_arm_strech_and_full.dart';
+export '01_foot_touching/pose_detector_views_foot_touching.dart';
+export '01_front_kicking/pose_detector_views_front_kicking.dart';
+export '02_arm_circles/pose_detector_views_arm_circles.dart';
+export '02_bend_side/pose_detector_views_bend_side.dart';
+export '02_elbow_plank/pose_detector_views_elbow_plank.dart';
+export '02_lunges/pose_detector_views_lunges.dart';
+export '02_squat/pose_detector_views_lunges.dart';
+export '02_standing_twist/pose_detector_views_standing_twist.dart';
